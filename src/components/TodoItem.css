@@ -1,0 +1,186 @@
+/* ===== TODO ITEM ===== */
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.list-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 3px 0 0 3px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.list-item:hover {
+  border-color: rgba(124, 106, 247, 0.2);
+  background: var(--bg-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card);
+}
+
+.list-item:hover::before {
+  opacity: 1;
+}
+
+.list-item.completed {
+  opacity: 0.65;
+}
+
+.list-item.completed::before {
+  background: var(--success);
+  opacity: 1;
+}
+
+/* ===== CHECKBOX ===== */
+.todo-checkbox {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 2px solid var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.todo-checkbox:hover {
+  border-color: var(--accent-primary);
+  background: var(--accent-subtle);
+}
+
+.todo-checkbox.checked {
+  border-color: var(--success);
+  background: var(--success);
+  animation: checkPop 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes checkPop {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.check-icon {
+  color: #0d0f1a;
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.2s ease;
+}
+
+.todo-checkbox.checked .check-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===== TODO TEXT ===== */
+.todo-text {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.5;
+  transition: all 0.3s ease;
+  word-break: break-word;
+}
+
+.list-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* ===== ACTION BUTTONS ===== */
+.item-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: all 0.25s ease;
+}
+
+.list-item:hover .item-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background: var(--bg-secondary);
+}
+
+.action-btn.delete-btn {
+  color: var(--danger);
+}
+
+.action-btn.delete-btn:hover {
+  background: var(--danger-subtle);
+  transform: scale(1.1);
+}
+
+/* ===== CLEAR ALL BUTTON ===== */
+.clear-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: 1px solid rgba(240, 96, 128, 0.25);
+  border-radius: 10px;
+  background: var(--danger-subtle);
+  color: var(--danger);
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+}
+
+.clear-btn:hover {
+  background: rgba(240, 96, 128, 0.2);
+  border-color: rgba(240, 96, 128, 0.5);
+  transform: translateY(-1px);
+}
